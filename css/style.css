@@ -1,0 +1,667 @@
+:root {
+    --green: #2C7A3E;
+    --green-light: #3D9C53;
+    --green-pale: #EAF4EC;
+    --blue: #1A5FA8;
+    --blue-light: #2979C8;
+    --teal: #0097A7;
+    --gold: #E8961A;
+    --gold-light: #F9B83A;
+    --black: #111714;
+    --gray: #4A5568;
+    --gray-light: #718096;
+    --bg: #FAFCFA;
+    --white: #FFFFFF;
+    --border: #DDE8E0;
+    --ghost: #ffffff26;
+    --ghost1: #ffffff4d;
+    --ghost2: #ffffffcc;
+
+    --bg-gradient: linear-gradient(135deg, var(--green) 0%, var(--blue) 100%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+    background: var(--bg);
+}
+
+p {
+    line-height: 1.85;
+}
+
+body > div {
+    height: 100dvh;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+}
+
+body > div > header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 0;
+}
+
+body > div > header nav {
+    font-size: 14.4px;
+    display: flex;
+    gap: 36px;
+}
+
+body > div > header nav a {
+    color: var(--gray);
+    border-bottom: 2px solid transparent;
+    transition: .3s;
+}
+
+body > div > header nav a:hover {
+    color: var(--green-light);
+    border-bottom: 2px solid var(--green);
+}
+
+body > div > header a {
+    text-decoration: none;
+}
+
+body > div > header > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#logo > a > div {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#logo h1 {
+    font-size: 18.4px;
+    font-family: serif;
+    color: var(--green);
+}
+
+#logo span {
+    font-size: 10.4px;
+    color: var(--gray-light);
+}
+
+#logo img {
+    width: 60px;
+}
+
+body > div > div {
+    height: 100%;
+    overflow: auto;
+}
+
+#banner {
+    background: var(--bg-gradient);
+    min-height: 100%;
+}
+
+#banner > div #badge {
+    background: var(--ghost);
+    border: 1px solid var(--ghost1);
+    padding: 7px 16px;
+    border-radius: 50px;
+    color: var(--bg);
+    font-size: 12.48px;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#banner > div #badge > .point {
+    background: var(--gold-light);
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+}
+
+#banner p {
+    max-width: 550px;
+    color: var(--white);
+}
+
+#banner .statiscs {
+    background: var(--ghost);
+    border: 1px solid var(--ghost1);
+    border-radius: 12px;
+    backdrop-filter: blur(16px);
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+#banner .statiscs > div {
+    flex: 1;
+    padding: 22px 24px;
+    display: grid;
+    color: var(--white);
+    text-align: center;
+    gap: 6px;
+    font-size: 12px;
+}
+
+#banner .statiscs > div:not(:last-child) {
+    border-right: 1px solid var(--ghost1);
+}
+
+#banner .statiscs > div span:first-child {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+#banner > div > *:not(:last-child) {
+    margin-bottom: 24px;
+}
+
+#who-are-we {
+    background: var(--white);
+}
+
+#who-are-we > div {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: start;
+    gap: 80px;
+}
+
+#who-are-we > div > * {
+    flex: 1;
+}
+
+#who-are-we .content > p {
+    margin-bottom: 20px;
+    color: var(--gray);
+}
+
+#who-are-we .content .cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+#who-are-we .content .cards > div {
+    flex: 1;
+    padding: 18px 20px;
+    background: var(--green-pale);
+    border-radius: 10px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+}
+
+#who-are-we .content .cards > div h3 {
+    font-size: .9rem;
+    margin-bottom: 4px;
+}
+
+#who-are-we .content .cards > div p {
+    font-size: 12.8px;
+    color: var(--gray);
+}
+
+#who-are-we .content .cards > div span {
+    font-size: 1.1rem;
+    background: var(--green);
+    width: 38px;
+    aspect-ratio: 1/1;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+#who-are-we .image {
+    position: relative;
+}
+
+#who-are-we .image > .card {
+    position: absolute;
+    padding: 24px 26px;
+    background: var(--green);
+    border-radius: 12px;
+    bottom: -20px;
+    right: -20px;
+    display: grid;
+    text-align: center;
+    color: var(--white);
+    font-size: 12px;
+}
+
+#who-are-we .image > .card > *:first-child {
+    font-size: 35.2px;
+    font-weight: bold;
+}
+
+#img-cover {
+    width: 100%;
+    height: 500px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+#img-cover > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#service {
+    text-align: center;
+}
+
+#service > div > p {
+    max-width: 545px;
+    color: var(--gray);
+    margin: auto;
+    margin-bottom: 60px;
+}
+
+#service .cards-servise {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+}
+
+#service .cards-servise > div {
+    flex: 1 320px;
+    background: var(--white);
+    padding: 36px 30px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    text-align: left;
+}
+
+#service .cards-servise > div:hover {
+    border-color: var(--green);
+}
+
+#service .cards-servise > div > span {
+    width: 56px;
+    aspect-ratio: 1/1;
+    background: var(--green-pale);
+    border-radius: 14px;
+    margin-bottom: 22px;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#service .cards-servise > div > h3 {
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+}
+
+#service .cards-servise > div > p {
+    color: var(--gray);
+    font-size: .88rem;
+    margin-bottom: 20px;
+}
+
+#service .cards-servise > div > a {
+    text-decoration: none;
+    font-size: .83rem;
+    color: var(--green);
+    font-weight: bold;
+}
+
+#why-we {
+    background: var(--bg-gradient);
+    color: var(--white);
+}
+
+#why-we p {
+    color: var(--ghost2);
+}
+
+#why-we > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+#why-we .mark, #why-we .tag {
+    color: var(--gold-light);
+}
+
+#why-we .why-list {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    margin-top: 36px;
+}
+
+#why-we .why-list > div {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    font-size: .85rem;
+}
+
+#why-we .why-list > div h3 {
+    margin-bottom: 4px;
+    font-size: .95rem;
+    font-weight: bold;
+}
+
+#why-we .why-list > div > div:first-child {
+    background: var(--ghost);
+    border: 1px solid var(--ghost1);
+    width: 44px;
+    aspect-ratio: 1/1;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+#why-we .why-view {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+#why-we .why-view > div {
+    background: var(--ghost);
+    border: 1px solid var(--ghost1);
+    border-radius: 14px;
+    padding: 28px 24px;
+    display: grid;
+    text-align: center;
+    gap: 6px;
+    font-size: .78rem;
+    flex: 1 200px;
+    color: var(--ghost2);
+}
+
+#why-we .why-view > div > span:first-child {
+    font-size: 2.4rem;
+    font-weight: bold;
+    color: var(--gold-light);
+}
+
+#contact {
+    background: var(--white);
+}
+
+#contact > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+#contact > div > * {
+    flex: 1;
+}
+
+#contact p {
+    color: var(--gray);
+}
+
+#contact .info-items {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 32px;
+}
+
+#contact .info-items > div {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    font-size: .9rem;
+}
+
+#contact .info-items > div > span {
+    width: 42px;
+    aspect-ratio: 1/1;
+    border-radius: 10px;
+    background: var(--green-pale);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+#contact .info-items > div > div {
+    display: grid;
+    color: var(--gray);
+}
+
+#contact .info-items > div > div > span:first-child {
+    font-weight: bold;
+    color: var(--black);
+}
+
+#contact form {
+    background: var(--bg);
+    padding: 44px 40px;
+    border-radius: 16px;
+    display: grid;
+}
+
+#contact form h3 {
+    margin-bottom: 28px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#contact form > div {
+    display: grid;
+    margin-bottom: 30px;
+}
+
+#contact form > div > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+#contact form > div > div:not(:last-child) {
+    margin-bottom: 16px;
+}
+
+#contact form > div > div > section {
+    flex: 1;
+    display: grid;
+}
+
+#contact form > div > div > section label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: var(--gray);
+    font-size: .8rem;
+}
+
+#contact form input, #contact form textarea {
+    padding: 13px 16px;
+    border-radius: 8px;
+    outline: none;
+    border: 1.5px solid var(--border);
+    font-size: .92rem;
+    transition: .2s;
+}
+
+#contact form input:focus, #contact form textarea:focus {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(44, 122, 62, .1);
+}
+
+body > div > div > main > section {
+    padding: 70px 0;
+}
+
+body > div > div > footer {
+    background: var(--black);
+    color: var(--ghost2);
+    font-size: .88rem;
+}
+
+body > div > div > footer > div > div:first-child {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 30px 0;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+body > div > div > footer > div > div:first-child p {
+    max-width: 300px;
+}
+
+body > div > div > footer > div > div:first-child h3 {
+    font-size: .82rem;
+    margin-bottom: 18px;
+    color: var(--white);
+}
+
+body > div > div > footer > div > div:first-child nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: start;
+}
+
+body > div > div > footer > div > div:first-child nav a {
+    text-decoration: none;
+    color: var(--ghost2);
+    transition: .2s;
+}
+
+body > div > div > footer > div > div:first-child nav a:hover {
+    color: var(--gold-light);
+}
+
+body > div > div > footer > div > div:last-child {
+    text-align: center;
+    padding: 10px 0;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255, 255, 255, .1);
+}
+
+.container {
+    padding: 0 15px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.big {
+    font-size: clamp(2.6rem, 5vw, 3.2rem);
+    line-height: normal;
+}
+
+.mark {
+    color: var(--gold-light);
+}
+
+.title .mark {
+    color: var(--green)
+}
+
+.title {
+    padding-bottom: 18px;
+    font-size: clamp(2rem, 3.5vw, 2.5rem);
+}
+
+.tag {
+    font-size: 11.52px;
+    margin-bottom: 16px;
+    padding-left: 12px;
+    color: var(--green);
+    border-left: 3px solid var(--gold);
+    font-weight: bold;
+}
+
+.center-tag {
+    display: flex;
+    justify-content: center;
+}
+
+.shadow, .shadow-hover:hover {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .15);
+}
+
+.btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #25d366;
+    color: #fff;
+    padding: 16px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: .95rem;
+    margin-top: 32px;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, .3);
+    transition: .2s all;
+}
+
+.btn-whatsapp svg {
+    width: 22px;
+    aspect-ratio: 1/1;
+    fill: #fff;
+}
+
+.btn-whatsapp:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(37, 211, 102, .4);
+}
+
+.btn {
+    background: var(--green);
+    padding: 10px 24px;
+    color: var(--white);
+    border-radius: 6px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s all;
+}
+
+.btn:hover {
+    background: var(--green-light);
+    transform: translateY(-1px);
+}
+
+@media screen and (max-width: 768px) {
+    #banner .statiscs {
+        flex-direction: column;
+    }
+
+    #banner .statiscs > div:not(:last-child) {
+        border-right: none;
+        border-bottom: 1px solid var(--ghost1);
+    }
+
+    #who-are-we > div {
+        flex-direction: column;
+    }
+
+    #who-are-we .image > .card {
+        right: 0;
+    }
+
+    #why-we > div, #contact > div {
+        flex-direction: column;
+    }
+}

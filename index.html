@@ -1,1374 +1,545 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-
+<html lang = "pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgriConsult – Consultoria Agrária</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --green: #2C7A3E;
-            --green-light: #3D9C53;
-            --green-pale: #EAF4EC;
-            --blue: #1A5FA8;
-            --blue-light: #2979C8;
-            --teal: #0097A7;
-            --gold: #E8961A;
-            --gold-light: #F9B83A;
-            --black: #111714;
-            --gray: #4A5568;
-            --gray-light: #718096;
-            --bg: #FAFCFA;
-            --white: #FFFFFF;
-            --border: #DDE8E0;
-        }
-
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--bg);
-            color: var(--black);
-            overflow-x: hidden;
-        }
-
-        /* ─── NAVBAR ─── */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-            padding: 0 5%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 72px;
-            transition: box-shadow .3s;
-        }
-
-        nav.scrolled {
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
-        }
-
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-
-        .nav-logo img {
-            height: 100px;
-        }
-
-        .nav-logo-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.1;
-        }
-
-        .nav-logo-text span:first-child {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 1.15rem;
-            color: var(--green);
-        }
-
-        .nav-logo-text span:last-child {
-            font-size: .65rem;
-            letter-spacing: .12em;
-            text-transform: uppercase;
-            color: var(--gray-light);
-            font-weight: 500;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 36px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--gray);
-            font-size: .9rem;
-            font-weight: 500;
-            letter-spacing: .02em;
-            position: relative;
-            padding-bottom: 3px;
-            transition: color .2s;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--green);
-            transition: width .3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--green);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-cta {
-            background: var(--green);
-            color: var(--white);
-            padding: 10px 24px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: .88rem;
-            font-weight: 600;
-            letter-spacing: .04em;
-            transition: background .2s, transform .2s;
-        }
-
-        .nav-cta:hover {
-            background: var(--green-light);
-            transform: translateY(-1px);
-        }
-
-        /* ─── HERO ─── */
-        #hero {
-            min-height: 100vh;
-            background:
-                linear-gradient(135deg, rgba(44, 122, 62, 0.88) 0%, rgba(26, 95, 168, 0.75) 100%),
-                url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1600&q=80') center/cover no-repeat;
-            display: flex;
-            align-items: center;
-            padding: 120px 5% 80px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* geometric decoration */
-        #hero::before {
-            content: '';
-            position: absolute;
-            right: -80px;
-            bottom: -80px;
-            width: 520px;
-            height: 520px;
-            border: 80px solid rgba(255, 255, 255, 0.07);
-            border-radius: 50%;
-        }
-
-        #hero::after {
-            content: '';
-            position: absolute;
-            right: 80px;
-            bottom: -120px;
-            width: 340px;
-            height: 340px;
-            border: 50px solid rgba(232, 150, 26, 0.15);
-            border-radius: 50%;
-        }
-
-        .hero-content {
-            max-width: 680px;
-            z-index: 2;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: #fff;
-            font-size: .78rem;
-            font-weight: 600;
-            letter-spacing: .1em;
-            text-transform: uppercase;
-            padding: 7px 16px;
-            border-radius: 50px;
-            margin-bottom: 28px;
-            backdrop-filter: blur(8px);
-            animation: fadeUp .7s ease both;
-        }
-
-        .hero-badge::before {
-            content: '';
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: var(--gold-light);
-        }
-
-        .hero-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.6rem, 5vw, 4rem);
-            font-weight: 900;
-            color: #fff;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            animation: fadeUp .7s .1s ease both;
-        }
-
-        .hero-title em {
-            font-style: italic;
-            color: var(--gold-light);
-        }
-
-        .hero-sub {
-            font-size: 1.08rem;
-            color: rgba(255, 255, 255, .85);
-            line-height: 1.75;
-            max-width: 520px;
-            margin-bottom: 44px;
-            font-weight: 300;
-            animation: fadeUp .7s .2s ease both;
-        }
-
-        .hero-btns {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            animation: fadeUp .7s .3s ease both;
-        }
-
-        .btn-primary {
-            background: var(--gold);
-            color: var(--black);
-            padding: 15px 34px;
-            border-radius: 7px;
-            font-weight: 700;
-            font-size: .95rem;
-            letter-spacing: .04em;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            transition: background .2s, transform .2s, box-shadow .2s;
-            box-shadow: 0 4px 20px rgba(232, 150, 26, .35);
-        }
-
-        .btn-primary:hover {
-            background: var(--gold-light);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(232, 150, 26, .45);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: #fff;
-            padding: 15px 34px;
-            border-radius: 7px;
-            font-weight: 600;
-            font-size: .95rem;
-            letter-spacing: .04em;
-            text-decoration: none;
-            border: 2px solid rgba(255, 255, 255, .5);
-            transition: border-color .2s, background .2s;
-        }
-
-        .btn-outline:hover {
-            border-color: #fff;
-            background: rgba(255, 255, 255, .1);
-        }
-
-        .hero-stats {
-            position: absolute;
-            bottom: 40px;
-            left: 5%;
-            right: 5%;
-            display: flex;
-            gap: 0;
-            background: rgba(255, 255, 255, .12);
-            border: 1px solid rgba(255, 255, 255, .2);
-            backdrop-filter: blur(16px);
-            border-radius: 12px;
-            overflow: hidden;
-            z-index: 2;
-            animation: fadeUp .7s .5s ease both;
-        }
-
-        .stat-item {
-            flex: 1;
-            padding: 22px 24px;
-            text-align: center;
-            border-right: 1px solid rgba(255, 255, 255, .2);
-        }
-
-        .stat-item:last-child {
-            border-right: none;
-        }
-
-        .stat-num {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            font-weight: 700;
-            color: #fff;
-            display: block;
-        }
-
-        .stat-label {
-            font-size: .75rem;
-            color: rgba(255, 255, 255, .7);
-            text-transform: uppercase;
-            letter-spacing: .09em;
-            font-weight: 500;
-        }
-
-        /* ─── SECTIONS COMMON ─── */
-        section {
-            padding: 100px 5%;
-        }
-
-        .section-tag {
-            display: inline-block;
-            font-size: .72rem;
-            font-weight: 700;
-            letter-spacing: .15em;
-            text-transform: uppercase;
-            color: var(--green);
-            border-left: 3px solid var(--gold);
-            padding-left: 12px;
-            margin-bottom: 16px;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 3.5vw, 2.8rem);
-            font-weight: 800;
-            color: var(--black);
-            line-height: 1.2;
-            margin-bottom: 18px;
-        }
-
-        .section-title span {
-            color: var(--green);
-        }
-
-        .section-sub {
-            font-size: 1rem;
-            color: var(--gray);
-            line-height: 1.8;
-            max-width: 560px;
-        }
-
-        /* ─── SOBRE ─── */
-        #sobre {
-            background: var(--white);
-        }
-
-        .sobre-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .sobre-img-wrap {
-            position: relative;
-        }
-
-        .sobre-img-wrap img {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, .15);
-        }
-
-        .sobre-badge-float {
-            position: absolute;
-            bottom: -24px;
-            right: -24px;
-            background: var(--green);
-            color: #fff;
-            padding: 24px 28px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 8px 30px rgba(44, 122, 62, .35);
-        }
-
-        .sobre-badge-float strong {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            font-weight: 900;
-            display: block;
-            line-height: 1;
-        }
-
-        .sobre-badge-float span {
-            font-size: .75rem;
-            letter-spacing: .07em;
-            opacity: .85;
-        }
-
-        .sobre-text {
-            padding-left: 20px;
-        }
-
-        .sobre-text p {
-            font-size: .98rem;
-            color: var(--gray);
-            line-height: 1.85;
-            margin-bottom: 20px;
-        }
-
-        .valores-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-top: 32px;
-        }
-
-        .valor-card {
-            background: var(--green-pale);
-            border-radius: 10px;
-            padding: 18px 20px;
-            display: flex;
-            gap: 14px;
-            align-items: flex-start;
-        }
-
-        .valor-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 8px;
-            background: var(--green);
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
-
-        .valor-card h4 {
-            font-weight: 700;
-            font-size: .9rem;
-            margin-bottom: 4px;
-            color: var(--black);
-        }
-
-        .valor-card p {
-            font-size: .8rem;
-            color: var(--gray);
-            line-height: 1.6;
-        }
-
-        /* ─── SERVIÇOS ─── */
-        #servicos {
-            background: var(--bg);
-        }
-
-        .servicos-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .servicos-header .section-sub {
-            margin: 0 auto;
-        }
-
-        .servicos-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
-        }
-
-        .servico-card {
-            background: var(--white);
-            border-radius: 14px;
-            padding: 36px 30px;
-            border: 1px solid var(--border);
-            transition: transform .3s, box-shadow .3s, border-color .3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .servico-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--green), var(--teal));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform .3s;
-        }
-
-        .servico-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, .1);
-            border-color: var(--green);
-        }
-
-        .servico-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .servico-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
-            background: var(--green-pale);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
-            margin-bottom: 22px;
-        }
-
-        .servico-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .servico-card p {
-            font-size: .88rem;
-            color: var(--gray);
-            line-height: 1.8;
-        }
-
-        .servico-card .learn-more {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--green);
-            font-size: .83rem;
-            font-weight: 600;
-            text-decoration: none;
-            margin-top: 20px;
-            transition: gap .2s;
-        }
-
-        .servico-card .learn-more:hover {
-            gap: 10px;
-        }
-
-        /* ─── POR QUÊ NÓS ─── */
-        #porque {
-            background: linear-gradient(135deg, var(--green) 0%, var(--blue) 100%);
-            color: #fff;
-        }
-
-        #porque .section-tag {
-            color: var(--gold-light);
-        }
-
-        #porque .section-title {
-            color: #fff;
-        }
-
-        #porque .section-title span {
-            color: var(--gold-light);
-        }
-
-        #porque .section-sub {
-            color: rgba(255, 255, 255, .8);
-        }
-
-        .porque-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .porque-list {
-            display: flex;
-            flex-direction: column;
-            gap: 22px;
-            margin-top: 36px;
-        }
-
-        .porque-item {
-            display: flex;
-            gap: 18px;
-        }
-
-        .porque-num {
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, .15);
-            border: 1px solid rgba(255, 255, 255, .25);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-
-        .porque-item h4 {
-            font-weight: 700;
-            margin-bottom: 4px;
-            font-size: .95rem;
-        }
-
-        .porque-item p {
-            font-size: .85rem;
-            color: rgba(255, 255, 255, .7);
-            line-height: 1.7;
-        }
-
-        .porque-visual {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        .pv-card {
-            background: rgba(255, 255, 255, .12);
-            border: 1px solid rgba(255, 255, 255, .2);
-            border-radius: 14px;
-            padding: 28px 24px;
-            text-align: center;
-            backdrop-filter: blur(8px);
-        }
-
-        .pv-card .pv-num {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.4rem;
-            font-weight: 900;
-            color: var(--gold-light);
-            display: block;
-            line-height: 1;
-        }
-
-        .pv-card .pv-label {
-            font-size: .78rem;
-            color: rgba(255, 255, 255, .7);
-            text-transform: uppercase;
-            letter-spacing: .08em;
-            margin-top: 6px;
-        }
-
-        /* ─── CONTATO ─── */
-        #contato {
-            background: var(--white);
-        }
-
-        .contato-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 80px;
-            align-items: start;
-        }
-
-        .contato-info h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 28px 0 14px;
-        }
-
-        .contato-info p {
-            font-size: .92rem;
-            color: var(--gray);
-            line-height: 1.8;
-            margin-bottom: 32px;
-        }
-
-        .info-items {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .info-item {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            font-size: .9rem;
-            color: var(--gray);
-        }
-
-        .info-item-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 10px;
-            background: var(--green-pale);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
-
-        .info-item strong {
-            color: var(--black);
-            font-weight: 600;
-            display: block;
-        }
-
-        .whatsapp-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: #25D366;
-            color: #fff;
-            padding: 16px 28px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: .95rem;
-            margin-top: 32px;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, .3);
-            transition: transform .2s, box-shadow .2s;
-        }
-
-        .whatsapp-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(37, 211, 102, .4);
-        }
-
-        .whatsapp-btn svg {
-            width: 22px;
-            height: 22px;
-            fill: #fff;
-        }
-
-        /* Form */
-        .contact-form {
-            background: var(--bg);
-            border-radius: 16px;
-            padding: 44px 40px;
-        }
-
-        .contact-form h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 28px;
-            color: var(--black);
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
-        }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: .8rem;
-            font-weight: 600;
-            letter-spacing: .06em;
-            text-transform: uppercase;
-            color: var(--gray);
-            margin-bottom: 8px;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 13px 16px;
-            border: 1.5px solid var(--border);
-            border-radius: 8px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: .92rem;
-            color: var(--black);
-            background: var(--white);
-            transition: border-color .2s, box-shadow .2s;
-            outline: none;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            border-color: var(--green);
-            box-shadow: 0 0 0 3px rgba(44, 122, 62, .1);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 130px;
-        }
-
-        .form-submit {
-            width: 100%;
-            padding: 15px;
-            background: var(--green);
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 700;
-            font-size: .95rem;
-            letter-spacing: .04em;
-            transition: background .2s, transform .2s;
-            margin-top: 6px;
-        }
-
-        .form-submit:hover {
-            background: var(--green-light);
-            transform: translateY(-1px);
-        }
-
-        /* ─── FOOTER ─── */
-        footer {
-            background: var(--black);
-            color: rgba(255, 255, 255, .6);
-            padding: 60px 5% 30px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1fr;
-            gap: 48px;
-            margin-bottom: 48px;
-        }
-
-        .footer-brand p {
-            font-size: .88rem;
-            line-height: 1.8;
-            margin: 16px 0 24px;
-        }
-
-        .footer-col h4 {
-            font-size: .82rem;
-            font-weight: 700;
-            letter-spacing: .12em;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, .85);
-            margin-bottom: 18px;
-        }
-
-        .footer-col ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .footer-col ul li a {
-            text-decoration: none;
-            color: rgba(255, 255, 255, .55);
-            font-size: .88rem;
-            transition: color .2s;
-        }
-
-        .footer-col ul li a:hover {
-            color: var(--gold-light);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, .1);
-            padding-top: 28px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: .82rem;
-        }
-
-        .footer-bottom a {
-            color: var(--gold-light);
-            text-decoration: none;
-        }
-
-        .footer-logo-img {
-            height: 48px;
-            filter: brightness(0) invert(1);
-            opacity: .85;
-        }
-
-        /* ─── ANIMATIONS ─── */
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(28px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ─── RESPONSIVE ─── */
-        @media (max-width: 1024px) {
-            .servicos-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .sobre-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .sobre-img-wrap {
-                max-height: 380px;
-            }
-
-            .sobre-img-wrap img {
-                height: 380px;
-            }
-
-            .sobre-text {
-                padding-left: 0;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            nav .nav-links {
-                display: none;
-            }
-
-            .hero-stats {
-                flex-direction: column;
-            }
-
-            .stat-item {
-                border-right: none;
-                border-bottom: 1px solid rgba(255, 255, 255, .2);
-            }
-
-            .stat-item:last-child {
-                border-bottom: none;
-            }
-
-            .servicos-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contato-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .porque-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .valores-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-form {
-                padding: 28px 24px;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                gap: 12px;
-                text-align: center;
-            }
-
-            section {
-                padding: 70px 5%;
-            }
-        }
-    </style>
+    <meta name="description" content = "institutional site - consultoria agrária">
+    <link rel="stylesheet" href="css/style.css">
+    <title>AgriConsult - Consultoria Agrária</title>
 </head>
-
 <body>
-
-    <!-- NAVBAR -->
-    <nav id="navbar">
-        <a href="#" class="nav-logo">
-            <img src="./imagens/logo.png" alt="AgriConsult" onerror="this.style.display='none'">
-            <div class="nav-logo-text">
-                <span>AgriConsult</span>
-                <span>Consultoria Agrária</span>
+    <div>
+        <header>
+            <div class = "container">
+                <div id = "logo">
+                    <a href = "#banner">
+                        <div>
+                            <img src = "images/logo.png" alt = "logotipo">
+                            <div>
+                                <h1>AgriConsult</h1>
+                                <span>CONSULTORIA AGRÁRIA</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <nav>
+                    <a href = "#who-are-we">Quem Somos</a>
+                
+                    <a href = "#service">Serviços</a>
+                
+                    <a href = "#why-we">Por que Nós</a>
+                
+                    <a href = "#contact">Contacto</a>
+                </nav>
+                
+                <a target = "_blank" href = "https://wa.me/244928862918" class = "btn">Falar Connosco</a>
             </div>
-        </a>
-        <ul class="nav-links">
-            <li><a href="#sobre">Quem Somos</a></li>
-            <li><a href="#servicos">Serviços</a></li>
-            <li><a href="#porque">Por que Nós</a></li>
-            <li><a href="#contato">Contacto</a></li>
-        </ul>
-        <a href="#contato" class="nav-cta">Falar Connosco</a>
-    </nav>
+        </header>
 
-    <!-- HERO -->
-    <section id="hero">
-        <div class="hero-content">
-            <div class="hero-badge">Consultoria Especializada</div>
-            <h1 class="hero-title">
-                Transformamos o Campo em <em>Resultados</em> Reais
-            </h1>
-            <p class="hero-sub">
-                Soluções estratégicas e técnicas para o desenvolvimento sustentável do sector agrário. Da gestão do solo à comercialização, acompanhamos cada etapa do seu negócio.
-            </p>
-            <div class="hero-btns">
-                <a href="#contato" class="btn-primary">Solicitar Consultoria</a>
-                <a href="#servicos" class="btn-outline">Ver Serviços</a>
-            </div>
+        <div>
+            <main>
+                <section id = "banner">
+                    <div class = "container">
+                        <div id = "badge" class = "observer">
+                            <span class = "point"></span>
+                            <span>CONSULTORIA ESPECIALIZADA</span>
+                        </div>
+                        
+                        <p class = "big observer">
+                            Transformamos o Campo em <span class = "mark">Resultados</span> Reais
+                        </p>
+                        
+                        <p class = "paragraph observer">
+                            Soluções estratégicas e técnicas para o desenvolvimento
+                            sustentável do sector agrário. Da gestão do solo à
+                            comercialização, acompanhamos cada etapa do seu negócio.
+                        </p>
+                        
+                        <div class = "statiscs observer">
+                            <div>
+                                <span>5+</span>
+                                <span>ANOS DE EXPERIÊNCIA</span>
+                            </div>
+                        
+                            <div>
+                                <span>74+</span>
+                                <span>CLIENTES ATENDIDOS</span>
+                            </div>
+                        
+                            <div>
+                                <span>18</span>
+                                <span>PROVÍNCIAS COBERTAS</span>
+                            </div>
+                        
+                            <div>
+                                <span>98%</span>
+                                <span>SATISFAÇÃO DOS CLIENTES</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id = "who-are-we">
+                    <div class = "container">
+                        <div class = "image">
+                            <div  id = "img-cover" class = "shadow">
+                                <img src = "images/field.jpeg" alt = "Imagem do campo">
+                            </div>
+
+                            <div class = "card">
+                                <span>+5</span>
+                                <span>Anos no sector</span>
+                            </div>
+                        </div>
+
+                        <div class = "content">
+                            <div class = "tag">QUEM SOMOS</div>
+
+                            <h2 class = "title">Especialistas que <span class="mark">entendem</span> o campo</h2>
+
+                            <p>
+                                A AgriConsult é uma empresa de referência no sector da
+                                consultoria agrária em Angola, fundada com a missão de
+                                impulsionar a produtividade e a sustentabilidade do agronegócio
+                                nacional.
+                            </p>
+
+                            <p>
+                                A nossa equipa multidisplinar conta com engenheiros agrários,
+                                economistas e especialistas em gestão rural, oferendo Soluções
+                                integradas e personalizadas para cada cliente, desde pequenos produtores
+                                até grandes empresas agroindustriais.
+                            </p>
+
+                            <div class = "cards">
+                                <div class = "observer">
+                                    <span>🌱</span>
+
+                                    <div>
+                                        <h3>Sustentabilidade</h3>
+
+                                        <p>
+                                            Práticas que preservam e potenciam
+                                            o solo para as próximas gerações.
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <div class = "observer">
+                                    <span>📊</span>
+
+                                    <div>
+                                        <h3>Rigor Técnico</h3>
+
+                                        <p>
+                                            Analises baseadas em dados e evidências
+                                            cientificas actualizadas.
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <div class = "observer">
+                                    <span>🤝</span>
+
+                                    <div>
+                                        <h3>Compromisso</h3>
+
+                                        <p>
+                                            Acompanhamento contínuo e próximo ao
+                                            longo de todo o processo.
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <div class = "observer">
+                                    <span>🚀</span>
+
+                                    <div>
+                                        <h3>Inovação</h3>
+
+                                        <p>
+                                            Tecnologias e métodos avançados para maximizar
+                                            resultados.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id = "service">
+                    <div class = "container">
+                        <div class = "center-tag">
+                            <div class = "tag">O QUE OFERECEMOS</div>
+                        </div>
+
+                        <h2 class = "title">Serviços que <span class = "mark">impulsionam</span> o seu negócio</h2>
+
+                        <p>
+                            Uma gama completa de Serviços técnicos e estratégicos
+                            desenhados para o sector agrário angolano.
+                        </p>
+
+                        <div class = "cards-servise">
+                            <div class = "shadow-hover observer">
+                                <span>🌾</span>
+
+                                <h3>Gestão de Explorações Agrícolas</h3>
+
+                                <p>
+                                    Planeamento e acompanhamento técnico de
+                                    explorações, optimizando recursos e maximizando
+                                    a produtividade de forma sustentável.
+                                </p>
+
+                                <a href = "#contact">Saber mais →</a>
+                            </div>
+                            
+                            <div class = "shadow-hover observer">
+                                <span>🧪</span>
+
+                                <h3>Análise e Fertilidade do Solo</h3>
+
+                                <p>
+                                    Estudos aprofundados do solo com recomendações
+                                    de correctivos e fertilizantes para garantir colheitas
+                                    de elevada qualidade.
+                                </p>
+
+                                <a href = "#contact">Saber mais →</a>
+                            </div>
+
+                            <div class = "shadow-hover observer">
+                                <span>💧</span>
+
+                                <h3>Irrigação e Recursos Hídricos</h3>
+
+                                <p>
+                                    Projectos de sistemas de rega eficientes, estudos
+                                    hidricos e gestão responsável dos recursos hídricos
+                                    agrários.
+                                </p>
+
+                                <a href = "#contact">Saber mais →</a>
+                            </div>
+
+                            <div class = "shadow-hover observer">
+                                <span>🐄</span>
+
+                                <h3>Manejo e Desenvolvimento Pecuário</h3>
+
+                                <p>
+                                    Estudos e implemantação de práticas modernas
+                                    de manejo, alimentação, reprodução e controlo
+                                    sanitário para melhor o desempenho e a sustentabilidade
+                                    das explorações pecuárias.
+                                </p>
+
+                                <a href = "#contact">Saber mais →</a>
+                            </div>
+                            
+                            <div class = "shadow-hover observer">
+                                <span>📈</span>
+
+                                <h3>Estudos de Viabilidade Económica</h3>
+
+                                <p>
+                                    Análises de rentabilidade, planos de negócio e
+                                    assessoria financeira para investimentos no sector agropecuário.
+                                </p>
+
+                                <a href = "#contact">Saber mais →</a>
+                            </div>
+                            
+                            <div class = "shadow-hover observer">
+                                <span>🛡️</span>
+
+                                <h3>Gestão de Pragas e Doenças</h3>
+
+                                <p>
+                                    Monitorização fitossanitária, diagnóstico e
+                                    estratégias de controlo integrado para proteger
+                                    suas culturas.
+                                </p>
+
+                                <a href = "#contact">Saber mais →</a>
+                            </div>
+                            
+                            <div class = "shadow-hover observer">
+                                <span>📋</span>
+
+                                <h3>Licenciamento e Regularização</h3>
+
+                                <p>
+                                    Apoio jurídico-técnico em processos de
+                                    licenciamento fundiário, regularização de
+                                    explorações e acesso a financiamento.
+                                </p>
+
+                                <a href="">Saber mais →</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id = "why-we">
+                    <div class = "container">
+                        <div>
+                            <div class = "tag">DIFERENCIAIS</div>
+
+                            <h2 class = "title">Por que escolher a <span class="mark">Agriconsult?</span></h2>
+
+                            <p>
+                                Combinamos experiência técnica aprofundada com
+                                conhecimento do contexto angolano para entregar soluções
+                                que realmente funcionam.
+                            </p>
+
+                            <div class = "why-list">
+                                <div class = "observer">
+                                    <div>1</div>
+
+                                    <div>
+                                        <h3>Equipe Local com Visão Global</h3>
+
+                                        <p>
+                                            Profissionais formados nacionais e internacionalmente
+                                            com profundo conhecimento das realidades agrárias angolanas.
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <div class = "observer">
+                                    <div>2</div>
+
+                                    <div>
+                                        <h3>Abordagem Personalizada</h3>
+
+                                        <p>
+                                            Cada projecto é único. Desenvolvemos soluções
+                                            à medida das necessidades e objectivos especificos
+                                            do cliente.
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <div class = "observer">
+                                    <div>3</div>
+
+                                    <div>
+                                        <h3>Resultados Comprovados</h3>
+
+                                        <p>
+                                            Histórico sólido de aumento de
+                                            produtividade e retorno sobre investimento
+                                            nos nossos clientes.
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <div class = "observer">
+                                    <div>4</div>
+
+                                    <div>
+                                        <h3>Suporte Contínup</h3>
+
+                                        <p>
+                                            Acompanhamento antes, durante e após a implementação,
+                                            garantindo o sucesso a longo prazo.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class = "why-view">
+                            <div class = "observer">
+                                <span>74+</span>
+                                <span>PROJECTOS CONCLUÍDOS</span>
+                            </div>
+                            
+                            <div class = "observer">
+                                <span>40%</span>
+                                <span>AUMENTO MÉDIO DE PRODUTIVIDADE</span>
+                            </div>
+                            
+                            <div class = "observer">
+                                <span>18</span>
+                                <span>PROVÍNCIAS ATENDIDAS</span>
+                            </div>
+                            
+                            <div class = "observer">
+                                <span>98%</span>
+                                <span>TAXA DE SATISFAÇÃO</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id = "contact">
+                    <div class = "container">
+                        <div>
+                            <div class = "tag">FALE CONNOSCO</div>
+
+                            <h2 class = "title">Vamos <span class = "mark">Trabalhar</span> juntos</h2>
+
+                            <p>
+                                Pronto para transformar a sua exploração agrária?
+                                Entre em contacto connosco e um dos nossos especialistas
+                                responderá brevemente.
+                            </p>
+
+                            <div class = "info-items">
+                                <div>
+                                    <span>📍</span>
+
+                                    <div>
+                                        <span>Endereço</span>
+                                        <span>Luanda, Angola</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <span>📞</span>
+
+                                    <div>
+                                        <span>Telefone</span>
+                                        <span>+244 928 862 918</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a target = "_blank" href = "https://wa.me/244928862918" class = "btn-whatsapp">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                                </svg>
+                                Falar pelo WhatsApp
+                            </a>
+                        </div>
+
+                        <form action = "https://formspree.io/f/xkgzbnor" method = "post">
+                            <h3>Envie-nos uma Mensagem</h3>
+
+                            <div>
+                                <div>
+                                    <section>
+                                        <label for = "name">NOME COMPLETO</label>
+                                        <input
+                                            id = "name"
+                                            type = "text"
+                                            name = "nome"
+                                            placeholder = "O seu nome"
+                                            required
+                                        >
+                                    </section>
+
+                                    <section>
+                                        <label for = "email">EMAIL</label>
+                                        <input
+                                            id = "email"
+                                            name = "email"
+                                            type = "email"
+                                            placeholder = "email@exemplo.com"
+                                        >
+                                    </section>
+                                </div>
+                                
+                                <div>
+                                    <section>
+                                        <label for = "">NÚMERO DE TELEFONE</label>
+                                        <input
+                                            id = "phone"
+                                            name = "telefone"
+                                            type = "text"
+                                            placeholder = "+244 900 000 000"
+                                            required
+                                        >
+                                    </section>
+
+                                    <section>
+                                        <label for = "subject">ASSUNTO</label>
+                                        <input
+                                            id = "subject"
+                                            name = "assunto"
+                                            type = "text"
+                                            placeholder = "Ex: Gestão de Exploração"
+                                        >
+                                    </section>
+                                </div>
+                                
+                                <div>
+                                   <section>
+                                       <label for = "mesage">MENSAGEM</label>
+                                       <textarea
+                                           id = "mesage"
+                                           name = "mensagem"
+                                           rows="5"
+                                           placeholder = "Descreva sua necessidade ou dívida"
+                                           required
+                                        ></textarea>
+                                   </section>
+                                </div>
+                            </div>
+
+                            <button class = "btn">Enviar Mensagem →</button>
+                        </form>
+                    </div>
+                </section>
+            </main>
+
+            <footer>
+                <div class = "container">
+                    <div>
+                        <div>
+                            <h3>AgriConsult</h3>
+
+                            <p>
+                                Consultoria agrária de excelência
+                                para o desenvolvimento sustentável do
+                                agronegócio angolano.
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h3>SERVIÇOS</h3>
+
+                            <nav>
+                                <a href = "#service">Gestão de Explorações</a>
+                                <a href = "#service">Análise de Solo</a>
+                                <a href = "#service">Irrigação</a>
+                                <a href = "#service">Desenvolvimento Pecuário</a>
+                                <a href = "#service">Viabilidade Economica</a>
+                                <a href = "#service">Licenciamento</a>
+                            </nav>
+                        </div>
+                        
+                        <div>
+                            <h3>EMPRESA</h3>
+
+                            <nav>
+                                <a href = "#who-are-we">QUEM SOMOS</a>
+                                <a href = "#contact">Contacto</a>
+                            </nav>
+                        </div>
+                        
+                        <div>
+                            <h3>CONTACTO</h3>
+
+                            <nav>
+                                <a href="tel:+244928862918">+244 928 862 918</a>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div>
+                        &copy; 2026 Agriconsult - Consultoria Agrária. Todos os direitos reservados
+                    </div>
+                </div>
+            </footer>
         </div>
-
-        <div class="hero-stats">
-            <div class="stat-item">
-                <span class="stat-num">15+</span>
-                <span class="stat-label">Anos de Experiência</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-num">320+</span>
-                <span class="stat-label">Clientes Atendidos</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-num">18</span>
-                <span class="stat-label">Províncias Cobertas</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-num">98%</span>
-                <span class="stat-label">Satisfação dos Clientes</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- SOBRE -->
-    <section id="sobre">
-        <div class="sobre-grid">
-            <div class="sobre-img-wrap">
-                <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&q=80" alt="Consultoria Agrária">
-                <div class="sobre-badge-float">
-                    <strong>+15</strong>
-                    <span>Anos no sector</span>
-                </div>
-            </div>
-            <div class="sobre-text">
-                <div class="section-tag">Quem Somos</div>
-                <h2 class="section-title">Especialistas que <span>entendem</span> o campo</h2>
-                <p>A AgriConsult é uma empresa de referência no sector da consultoria agrária em Angola, fundada com a missão de impulsionar a produtividade e a sustentabilidade do agronegócio nacional.</p>
-                <p>A nossa equipa multidisciplinar conta com engenheiros agrários, economistas e especialistas em gestão rural, oferecendo soluções integradas e personalizadas para cada cliente — desde pequenos produtores até grandes empresas agroindustriais.</p>
-
-                <div class="valores-grid">
-                    <div class="valor-card">
-                        <div class="valor-icon">🌱</div>
-                        <div>
-                            <h4>Sustentabilidade</h4>
-                            <p>Práticas que preservam e potenciam o solo para as próximas gerações.</p>
-                        </div>
-                    </div>
-                    <div class="valor-card">
-                        <div class="valor-icon">📊</div>
-                        <div>
-                            <h4>Rigor Técnico</h4>
-                            <p>Análises baseadas em dados e evidências científicas actualizadas.</p>
-                        </div>
-                    </div>
-                    <div class="valor-card">
-                        <div class="valor-icon">🤝</div>
-                        <div>
-                            <h4>Compromisso</h4>
-                            <p>Acompanhamento contínuo e próximo ao longo de todo o processo.</p>
-                        </div>
-                    </div>
-                    <div class="valor-card">
-                        <div class="valor-icon">🚀</div>
-                        <div>
-                            <h4>Inovação</h4>
-                            <p>Tecnologias e métodos avançados para maximizar resultados.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SERVIÇOS -->
-    <section id="servicos">
-        <div class="servicos-header">
-            <div class="section-tag">O que Oferecemos</div>
-            <h2 class="section-title">Serviços que <span>impulsionam</span> o seu negócio</h2>
-            <p class="section-sub">Uma gama completa de serviços técnicos e estratégicos desenhados para o sector agrário angolano.</p>
-        </div>
-        <div class="servicos-grid">
-
-            <div class="servico-card">
-                <div class="servico-icon">🌾</div>
-                <h3>Gestão de Explorações Agrícolas</h3>
-                <p>Planeamento e acompanhamento técnico de explorações, optimizando recursos e maximizando a produtividade de forma sustentável.</p>
-                <a href="#contato" class="learn-more">Saber mais →</a>
-            </div>
-
-            <div class="servico-card">
-                <div class="servico-icon">🧪</div>
-                <h3>Análise e Fertilidade do Solo</h3>
-                <p>Estudos aprofundados do solo com recomendações de correctivos e fertilizantes para garantir colheitas de elevada qualidade.</p>
-                <a href="#contato" class="learn-more">Saber mais →</a>
-            </div>
-
-            <div class="servico-card">
-                <div class="servico-icon">💧</div>
-                <h3>Irrigação e Recursos Hídricos</h3>
-                <p>Projectos de sistemas de rega eficientes, estudos hidrológicos e gestão responsável dos recursos hídricos agrários.</p>
-                <a href="#contato" class="learn-more">Saber mais →</a>
-            </div>
-
-            <div class="servico-card">
-                <div class="servico-icon">📈</div>
-                <h3>Estudos de Viabilidade Económica</h3>
-                <p>Análises de rentabilidade, planos de negócio e assessoria financeira para investimentos no sector agropecuário.</p>
-                <a href="#contato" class="learn-more">Saber mais →</a>
-            </div>
-
-            <div class="servico-card">
-                <div class="servico-icon">🛡️</div>
-                <h3>Gestão de Pragas e Doenças</h3>
-                <p>Monitorização fitossanitária, diagnóstico e estratégias de controlo integrado para proteger as suas culturas.</p>
-                <a href="#contato" class="learn-more">Saber mais →</a>
-            </div>
-
-            <div class="servico-card">
-                <div class="servico-icon">📋</div>
-                <h3>Licenciamento e Regularização</h3>
-                <p>Apoio jurídico-técnico em processos de licenciamento fundiário, regularização de explorações e acesso a financiamento.</p>
-                <a href="#contato" class="learn-more">Saber mais →</a>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- POR QUE NÓS -->
-    <section id="porque">
-        <div class="porque-grid">
-            <div>
-                <div class="section-tag">Diferenciais</div>
-                <h2 class="section-title">Por que escolher a <span>AgriConsult?</span></h2>
-                <p class="section-sub">Combinamos experiência técnica aprofundada com conhecimento do contexto angolano para entregar soluções que realmente funcionam.</p>
-
-                <div class="porque-list">
-                    <div class="porque-item">
-                        <div class="porque-num">01</div>
-                        <div>
-                            <h4>Equipa Local com Visão Global</h4>
-                            <p>Profissionais formados nacional e internacionalmente com profundo conhecimento das realidades agrárias angolanas.</p>
-                        </div>
-                    </div>
-                    <div class="porque-item">
-                        <div class="porque-num">02</div>
-                        <div>
-                            <h4>Abordagem Personalizada</h4>
-                            <p>Cada projecto é único. Desenvolvemos soluções à medida das necessidades e objectivos específicos do cliente.</p>
-                        </div>
-                    </div>
-                    <div class="porque-item">
-                        <div class="porque-num">03</div>
-                        <div>
-                            <h4>Resultados Comprovados</h4>
-                            <p>Histórico sólido de aumento de produtividade e retorno sobre investimento nos nossos clientes.</p>
-                        </div>
-                    </div>
-                    <div class="porque-item">
-                        <div class="porque-num">04</div>
-                        <div>
-                            <h4>Suporte Contínuo</h4>
-                            <p>Acompanhamento antes, durante e após a implementação, garantindo o sucesso a longo prazo.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="porque-visual">
-                <div class="pv-card">
-                    <span class="pv-num">320+</span>
-                    <div class="pv-label">Projectos Concluídos</div>
-                </div>
-                <div class="pv-card">
-                    <span class="pv-num">40%</span>
-                    <div class="pv-label">Aumento Médio de Produtividade</div>
-                </div>
-                <div class="pv-card">
-                    <span class="pv-num">18</span>
-                    <div class="pv-label">Províncias Atendidas</div>
-                </div>
-                <div class="pv-card">
-                    <span class="pv-num">98%</span>
-                    <div class="pv-label">Taxa de Satisfação</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTATO -->
-    <section id="contato">
-        <div class="contato-grid">
-            <div class="contato-info">
-                <div class="section-tag">Fale Connosco</div>
-                <h2 class="section-title">Vamos <span>trabalhar</span> juntos</h2>
-                <p>Pronto para transformar a sua exploração agrária? Entre em contacto connosco e um dos nossos especialistas responderá brevemente.</p>
-
-                <div class="info-items">
-                    <div class="info-item">
-                        <div class="info-item-icon">📍</div>
-                        <div>
-                            <strong>Endereço</strong>
-                            Luanda, Angola
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-item-icon">📞</div>
-                        <div>
-                            <strong>Telefone</strong>
-                            +244 900 000 000
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-item-icon">✉️</div>
-                        <div>
-                            <strong>Email</strong>
-                            geral@agriconsult.co.ao
-                        </div>
-                    </div>
-                </div>
-
-                <a href="https://wa.me/244900000000" target="_blank" class="whatsapp-btn">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                    </svg>
-                    Falar pelo WhatsApp
-                </a>
-            </div>
-
-            <div class="contact-form">
-                <h3>Envie-nos uma Mensagem</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Nome Completo</label>
-                        <input type="text" placeholder="O seu nome">
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" placeholder="email@exemplo.com">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Número de Telefone</label>
-                        <input type="tel" placeholder="+244 900 000 000">
-                    </div>
-                    <div class="form-group">
-                        <label>Assunto</label>
-                        <input type="text" placeholder="Ex: Gestão de Exploração">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Mensagem</label>
-                    <textarea placeholder="Descreva a sua necessidade ou dúvida..."></textarea>
-                </div>
-                <button class="form-submit">Enviar Mensagem →</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
-                    <span style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:#fff;">AgriConsult</span>
-                </div>
-                <p>Consultoria agrária de excelência para o desenvolvimento sustentável do agronegócio angolano.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Serviços</h4>
-                <ul>
-                    <li><a href="#">Gestão de Explorações</a></li>
-                    <li><a href="#">Análise de Solo</a></li>
-                    <li><a href="#">Irrigação</a></li>
-                    <li><a href="#">Viabilidade Económica</a></li>
-                    <li><a href="#">Licenciamento</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Empresa</h4>
-                <ul>
-                    <li><a href="#sobre">Quem Somos</a></li>
-                    <li><a href="#">Nossa Equipa</a></li>
-                    <li><a href="#">Parceiros</a></li>
-                    <li><a href="#contato">Contacto</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Contacto</h4>
-                <ul>
-                    <li><a href="#">Luanda, Angola</a></li>
-                    <li><a href="tel:+244900000000">+244 900 000 000</a></li>
-                    <li><a href="mailto:geral@agriconsult.co.ao">geral@agriconsult.co.ao</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <span>© 2025 AgriConsult – Consultoria Agrária. Todos os direitos reservados.</span>
-            <span>Desenvolvido com <span style="color:var(--gold-light)">♥</span> em Angola</span>
-        </div>
-    </footer>
-
-    <script>
-        // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            navbar.classList.toggle('scrolled', window.scrollY > 30);
-        });
-
-        // Form submit feedback
-        document.querySelector('.form-submit').addEventListener('click', function() {
-            this.textContent = 'Mensagem Enviada! ✓';
-            this.style.background = '#25D366';
-            setTimeout(() => {
-                this.textContent = 'Enviar Mensagem →';
-                this.style.background = '';
-            }, 3000);
-        });
-
-        // Intersection Observer for fade-in
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.style.opacity = '1';
-                    e.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-
-        document.querySelectorAll('.servico-card, .valor-card, .pv-card, .porque-item').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(24px)';
-            el.style.transition = 'opacity .5s ease, transform .5s ease';
-            observer.observe(el);
-        });
-    </script>
+    </div>
+    <script src = "js/app.js"></script>
 </body>
-
 </html>
